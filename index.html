@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Bus - Aeropuerto El Dorado</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">Golden Bus</a>
+            <ul class="nav-links">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#routes">Rutas</a></li>
+                <li><a href="#tracker">Seguimiento</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+            <button id="theme-toggle" class="btn-theme" aria-label="Cambiar tema">🌙</button>
+        </div>
+    </nav>
+
+    <header id="home">
+        <div class="hero">
+            <div class="container">
+                <h1>Golden Bus</h1>
+                <p>Transporte de lujo en el Aeropuerto El Dorado</p>
+                <a href="#routes" class="btn-primary">Explorar Rutas</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="routes" class="bus-locator">
+            <div class="container">
+                <h2>Localizador de Rutas</h2>
+                <form id="bus-locator-form" aria-label="Formulario para buscar rutas de buses">
+                    <div class="form-group">
+                        <label for="origin">Origen:</label>
+                        <select id="origin" required aria-required="true">
+                            <option value="" disabled selected>Seleccione origen</option>
+                            <option value="Terminal 1">Terminal 1</option>
+                            <option value="Terminal 2">Terminal 2</option>
+                            <option value="Terminal de Carga">Terminal de Carga</option>
+                        </select>
+                    </div>
+                    <button type="button" id="swap-locations" class="btn-swap" aria-label="Intercambiar origen y destino">↔</button>
+                    <div class="form-group">
+                        <label for="destination">Destino:</label>
+                        <select id="destination" required aria-required="true">
+                            <option value="" disabled selected>Seleccione destino</option>
+                            <option value="Terminal 1">Terminal 1</option>
+                            <option value="Terminal 2">Terminal 2</option>
+                            <option value="Terminal de Carga">Terminal de Carga</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Buscar Ruta</button>
+                        <button type="button" id="clear-form" class="btn-secondary">Limpiar</button>
+                    </div>
+                </form>
+                <div id="route-result" class="result" role="alert">
+                    <div id="route-map" class="route-map"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tracker" class="live-tracker">
+            <div class="container">
+                <h2>Localizador de Buses en Vivo</h2>
+                <div class="controls">
+                    <div class="form-group">
+                        <label for="station-filter">Filtrar por estación:</label>
+                        <select id="station-filter">
+                            <option value="all">Todas las estaciones</option>
+                            <option value="Terminal 1">Terminal 1</option>
+                            <option value="Estación 1">Estación 1</option>
+                            <option value="Estación 2">Estación 2</option>
+                            <option value="Estación 3">Estación 3</option>
+                            <option value="Estación 4">Estación 4</option>
+                            <option value="Estación 5">Estación 5</option>
+                            <option value="Estación 6">Estación 6</option>
+                            <option value="Estación 7">Estación 7</option>
+                            <option value="Terminal 2">Terminal 2</option>
+                            <option value="Terminal de Carga">Terminal de Carga</option>
+                        </select>
+                    </div>
+                    <div class="map-actions">
+                        <button id="zoom-in" class="btn-secondary" aria-label="Acercar mapa">+</button>
+                        <button id="zoom-out" class="btn-secondary" aria-label="Alejar mapa">-</button>
+                        <button id="refresh-data" class="btn-primary" aria-label="Actualizar datos">Actualizar</button>
+                        <button id="toggle-animation" class="btn-primary" aria-label="Pausar o reanudar animación de buses">Pausar</button>
+                    </div>
+                </div>
+                <div id="map-container">
+                    <svg id="bus-map" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid" role="img" aria-label="Mapa lineal del Aeropuerto El Dorado">
+                        <line class="route-line-bg" x1="50" y1="200" x2="1350" y2="200" stroke="#CFD8DC" stroke-width="14"/>
+                        <line class="route-line" x1="50" y1="200" x2="1350" y2="200" stroke="#001F5B" stroke-width="8" stroke-dasharray="10,10"/>
+                        <g id="stations">
+                            <circle cx="50" cy="200" r="20" fill="#ffffff" stroke="#001F5B" stroke-width="4"/>
+                            <text x="50" y="260" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="600" class="station-label">Terminal 1</text>
+                            <circle cx="200" cy="200" r="16" fill="#ffffff" stroke="#001F5B" stroke-width="4"/>
+                            <text x="200" y="260" text-anchor="middle" fill="#ffffff" font-size="14" class="station-label">Estación 1</text>
+                            <circle cx="350" cy="200" r="16" fill="#ffffff" stroke="#001F5B" stroke-width="4"/>
+                            <text x="350" y="260" text-anchor="middle" fill="#ffffff" font-size="14" class="station-label">Estación 2</text>
+                            <circle cx="500" cy="200" r="16" fill="#ffffff" stroke="#001F5B" stroke-width="4"/>
+                            <text x="500" y="260" text-anchor="middle" fill="#ffffff" font-size="14" class="station-label">Estación 3</text>
+                            <circle cx="650" cy="200" r="16" fill="#ffffff" stroke="#001F5B" stroke-width="4"/>
+                            <text x="650" y="260" text-anchor="middle" fill="#ffffff" font-size="14" class="station-label">Estación 4</text>
+                            <circle cx="800" cy="200" r="16" fill="#ffffff" stroke="#001F5B" stroke-width="4"/>
+                            <text x="800" y="260" text-anchor="middle" fill="#ffffff" font-size="14" class="station-label">Estación 5</text>
+                            <circle cx="950" cy="200" r="16" fill="#ffffff" stroke="#001F5B" stroke-width="4"/>
+                            <text x="950" y="260" text-anchor="middle" fill="#ffffff" font-size="14" class="station-label">Estación 6</text>
+                            <circle cx="1100" cy="200" r="16" fill="#ffffff" stroke="#001F5B" stroke-width="4"/>
+                            <text x="1100" y="260" text-anchor="middle" fill="#ffffff" font-size="14" class="station-label">Estación 7</text>
+                            <circle cx="1250" cy="200" r="20" fill="#ffffff" stroke="#001F5B" stroke-width="4"/>
+                            <text x="1250" y="260" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="600" class="station-label">Terminal 2</text>
+                            <circle cx="1350" cy="200" r="20" fill="#ffffff" stroke="#001F5B" stroke-width="4"/>
+                            <text x="1350" y="260" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="600" class="station-label">Terminal de Carga</text>
+                        </g>
+                        <g id="bus-markers"></g>
+                    </svg>
+                </div>
+                <div id="bus-details" class="modal hidden" aria-hidden="true">
+                    <div class="modal-content">
+                        <span id="modal-close" class="close">&times;</span>
+                        <h3>Detalles del Bus</h3>
+                        <div id="bus-details-content"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Contáctanos</h2>
+                <form id="contact-form" aria-label="Formulario de contacto">
+                    <div class="form-group">
+                        <label for="name">Nombre:</label>
+                        <input type="name" id="name" required aria-required="true">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Correo:</label>
+                                <input type="email" id="email" required aria-required="true">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Mensaje:</label>
+                                <textarea id="message" required aria-required="true"></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary">Enviar</button>
+                        </form>
+                    </div>
+                </section>
+            </main>
+
+            <footer>
+                <div class="container">
+                    <p>© 2025 Golden Bus - Aeropuerto El Dorado. Innovación y excelencia en transporte.</p>
+                </div>
+            </footer>
+
+            <div id="notifications" class="notifications"></div>
+
+            <script src="script.js"></script>
+        </body>
+        </html>

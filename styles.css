@@ -1,0 +1,480 @@
+:root {
+            --primary: #001F5B;
+            --accent: #FFC107;
+            --secondary: #CFD8DC;
+            --text: #333;
+            --bg: #F5F7FA;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            --border-radius: 1rem;
+        }
+
+        [data-theme="dark"] {
+            --primary: #003087;
+            --text: #E0E0E0;
+            --bg: #121212;
+            --card-bg: rgba(30, 30, 30, 0.85);
+            --secondary: #B0BEC5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .navbar {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: clamp(1.5rem, 3vw, 1.8rem);
+            font-weight: 800;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .btn-theme {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 31, 91, 0.7), rgba(0, 31, 91, 0.7)), url('https://images.unsplash.com/photo-1504197832063-3f5f5f4f6e60?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover;
+            color: #fff;
+            text-align: center;
+            padding: clamp(5rem, 12vw, 8rem) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            animation: pulse-bg 8s infinite ease-in-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 800;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1.2s ease-in;
+        }
+
+        .hero p {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 300;
+            margin: 1rem 0;
+            animation: fadeIn 1.7s ease-in;
+        }
+
+        .bus-locator, .live-tracker, .contact-section {
+            padding: clamp(2rem, 5vw, 3rem) 0;
+            margin: clamp(2rem, 5vw, 3rem) 0;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.5s ease;
+        }
+
+        .bus-locator:hover, .live-tracker:hover, .contact-section:hover {
+            transform: translateY(-0.5rem);
+        }
+
+        h2 {
+            color: var(--primary);
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            color: var(--text);
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--secondary);
+            border-radius: 0.5rem;
+            font-size: clamp(0.9rem, 2.2vw, 1rem);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 193, 7, 0.3);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--accent), #FFB300);
+            color: var(--primary);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255, 193, 7, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: var(--primary);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #B0BEC5;
+        }
+
+        .btn-swap {
+            background: none;
+            border: 1px solid var(--secondary);
+            color: var(--text);
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-swap:hover {
+            transform: rotate(180deg);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 0.5rem;
+            text-align: center;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .result.error {
+            background: rgba(211, 47, 47, 0.2);
+            color: #D32F2F;
+        }
+
+        .route-map {
+            margin-top: 1rem;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .map-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        #map-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            width: 100%;
+        }
+
+        #bus-map {
+            width: 100%;
+            height: auto;
+            max-width: 1000px;
+            min-height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .bus-marker {
+            cursor: pointer;
+            transition: transform 0.8s ease;
+        }
+
+        .bus-marker:hover {
+            transform: scale(1.3);
+        }
+
+        .bus-icon {
+            fill: var(--accent);
+            stroke: var(--primary);
+            stroke-width: 2;
+            animation: vibrate 2s infinite;
+        }
+
+        .tooltip {
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            fill: #fff;
+            background: var(--primary);
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .bus-marker:hover + .tooltip, .bus-marker.touched + .tooltip {
+            opacity: 1;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 1rem;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .notifications {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            z-index: 1000;
+        }
+
+        .notification {
+            background: var(--primary);
+            color: #fff;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow);
+            animation: slideIn 0.3s ease-out;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .notification .close {
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        footer {
+            background: var(--primary);
+            color: var(--accent);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        @keyframes vibrate {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            50% { transform: translateX(2px); }
+            75% { transform: translateX(-2px); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(2rem); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(3rem); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse-bg {
+            0% { opacity: 0.2; }
+            50% { opacity: 0.4; }
+            100% { opacity: 0.2; }
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .navbar .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .controls, .form-actions {
+                flex-direction: column;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .station-label {
+                font-size: 0.8rem;
+                transform: rotate(45deg);
+                y: 280;
+            }
+
+            .btn-swap {
+                margin: 1rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .station-label:not(:nth-child(-n+3):nth-last-child(-n+3)) {
+                display: none;
+            }
+
+            .station-label:nth-child(1), .station-label:nth-child(9), .station-label:nth-child(10) {
+                font-size: 0.9rem;
+                transform: none;
+                y: 260;
+            }
+
+            .tooltip {
+                max-width: 80vw;
+            }
+
+            #bus-map {
+                min-height: 200px;
+            }
+        }
+
+        /* Accessibility */
+        :focus {
+            outline: 0.2rem solid var(--accent);
+            outline-offset: 0.2rem;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
